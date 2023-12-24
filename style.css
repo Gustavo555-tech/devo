@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+}
+
+/*Body settigns*/
+body {
+    background: #efefef;
+}
+
+/*Navigation bar settings*/
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #191BA9;
+    padding: 5px 2%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/*Logo sizing*/
+.logo {
+    width: 55px;
+    margin-right: 20px;
+}
+
+/*Icon allignment on left and right*/
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/*Horizontal*/
+.nav-left ul li {
+    list-style: none;
+    display: inline-block;
+}
+
+/*Notification, post and inbox icon spacing*/
+.nav-left ul li img {
+    width: 28px;
+    margin: 0 10px;
+}
+
+/*User profile picture display settings*/
+.nav-user-icon img {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-user-icon {
+    margin-left: 30px;
+}
+
+#user-icon {
+    width: 50px;
+    /* Set the width and height as needed */
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    /* Add cursor style to indicate it's clickable */
+}
+
+#change-icon-link {
+    color: blue;
+    /* Add your desired link color */
+    cursor: pointer;
+}
+
+#change-icon-link:hover {
+    text-decoration: underline;
+    /* Underline on hover for better feedback */
+}
+
+/*Search box look*/
+.search-box {
+    background: #efefef;
+    width: 350px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/*Search box icon*/
+.search-box img {
+    width: 18px;
+}
+
+/*Search box input settings*/
+.search-box input {
+    width: 100%;
+    background: transparent;
+    padding: 10px;
+    outline: none;
+    border: 0;
+}
+
+/*Position in relation to profile picture*/
+.online {
+    position: relative;
+}
+
+/*Online indicator general settings*/
+.online::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #41db51;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/*General settigns for all main content bars*/
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+
+/*Left sidebar looks*/
+.left-sidebar {
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+}
+
+.right-sidebar {
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    color: #626262;
+}
+
+.main-content {
+    flex-basis: 47%;
+}
+
+.imp-links a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #626262;
+    width: fit-content;
+}
+
+.imp-links a img {
+    width: 25px;
+    margin-right: 15px;
+}
+
+.imp-links a:last-child {
+    color: #1876f2;
+}
+
+.imp-links {
+    border-bottom: 1px solid #ccc;
+}
+
+.sidebar-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.right-sidebar h4 {
+    font: 600;
+    font-size: 16px;
+}
+
+.sidebar-title a {
+    text-decoration: none;
+    color: #1876f2;
+    font-size: 12px;
+}
+
+.online-list {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.online-list .online img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.online-list .online {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.online-list .online::after {
+    top: unset;
+    bottom: 5px;
+}
+
+.post-text {
+    font-size: 40px;
+    max-height: 200px;
+    /* Stel de gewenste maximale hoogte in */
+    overflow-y: auto;
+    /* Voeg een schuifbalk toe als de tekst te lang is */
+}
+
+/* Voeg CSS-stijlen toe voor het meldingencontainer */
+#notifications-container {
+    position: absolute;
+    top: 50px;
+    /* Pas dit aan op basis van je lay-out */
+    right: 0;
+    width: 200px;
+    /* Pas dit aan op basis van je lay-out */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
+/* Voeg de hidden-klasse toe om het container standaard te verbergen */
+.hidden {
+    display: none;
+}
+
+#menu-container {
+    /* Add your styling for the menu container */
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    left: -100px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+#menu-container ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+#menu-container li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+#menu-container li:last-child {
+    border-bottom: none;
+}
+
+#email-modal {
+    /* Additional styling for your modal */
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: white;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+}

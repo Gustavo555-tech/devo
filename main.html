@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>SchoolForum</title>
+    <!--Connect stylesheet to HTML file-->
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <!--Create navigation-bar-->
+    <nav>
+        <div class="nav-left">
+            <!--insert logo-->
+            <img src="SchoolForumLogo.png" class="logo">
+            <ul>
+                <!--insert notifications, create post and inbox icons-->
+                <li id="nav-notifications-btn"><img src="SchoolForumNotifications.png"></li>
+                <li><img src="SchoolForumInbox.png"></li>
+                <li><img src="SchoolForumCreatePost.png"></li>
+            </ul>
+            <div id="notifications-container" class="hidden">
+                <!-- Hier worden de meldingen weergegeven -->
+            </div>
+
+        </div>
+        <div class="nav-right">
+            <!--add navigation bar icon-->
+            <div class="search-box">
+                <img src="SchoolForumSearch.png">
+                <input type="text" placeholder="Search...">
+            </div>
+            <!--add profile picture and online indicator-->
+            <div class="nav-user-icon online">
+                <img id="profile-picture" src="SchoolForumProfilePicture.png" alt="School Forum Profile Picture"
+                    style="cursor: pointer;">
+                <div id="menu-container" class="hidden">
+                    <!-- Your account button -->
+                    <li><button id="account-btn">Your account</button></li>
+                    <div id="account-menu" class="submenu hidden">
+                        <!-- Add options for changing email, password, and profile picture -->
+                        <ul>
+                            <li><button id="change-email-btn">Change Email</button></li>
+                            <li><button id="change-password-btn">Change Password</button></li>
+                            <li><button id="change-profile-btn">Change Profile Picture</button></li>
+                        </ul>
+                    </div>
+
+                    <div id="email-modal" class="modal hidden">
+                        <input type="text" id="new-email" placeholder="Enter new email">
+                        <button id="change-email-btn-modal">Change Email</button>
+                        <button id="close-email-btn-modal">Close</button>
+                    </div>
+                    <div id="password-modal" class="modal hidden">
+                        <input type="text" id="new-password" placeholder="Enter new password">
+                        <button id="change-password-btn-modal">Change Email</button>
+                        <button id="close-password-btn-modal">Close</button>
+                    </div>
+
+                    <!-- Your activity button -->
+                    <li><button id="activity-btn">Your activity</button></li>
+                    <div id="activity-menu" class="submenu hidden">
+                        <!-- Add options for your activity -->
+                    </div>
+
+                    <!-- Notifications button -->
+                    <li><button id="notifications-btn">Notifications</button></li>
+                    <div id="notifications-menu" class="submenu hidden">
+                        <!-- Add options for notifications -->
+                    </div>
+                </div>
+
+            </div>
+    </nav>
+    <!--make a container with all settings of left/right-sidebar and main-content-->
+    <div class="container">
+
+        <!--------------------------Left-sidebar-------------------------->
+        <div class="left-sidebar">
+            <div class="imp-links">
+                <a href="#"><img src="SchoolForumPostsIcon.png">Latest Posts</a>
+                <a href="#"><img src="SchoolForumContactsIcon.png">Contacts</a>
+                <a href="#"><img src="SchoolForumGroupsIcon.png">Groups</a>
+                <a href="#">See More</a>
+            </div>
+            <div class="shortcut-links">
+
+            </div>
+        </div>
+
+        <!--------------------------Main-content-------------------------->
+        <style>
+            /* Aangepaste stijlen voor posts */
+            #posts-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .post {
+                border: 1px solid #ccc;
+                margin: 10px 0;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: #f5f5f5;
+            }
+
+            .post-text {
+                font-size: 16px;
+            }
+
+            .post-metadata {
+                font-size: 12px;
+                color: #888;
+            }
+        </style>
+
+        <div class="main-content">
+
+            <div id="posts-container">
+                <!-- Hier worden de live posts weergegeven -->
+            </div>
+            <div>
+                <form id="post-form">
+                    <textarea id="post-input" placeholder="Create Post..."></textarea>
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+        </div>
+
+        <!--------------------------Right-sidebar-------------------------->
+        <div class="right-sidebar">
+            <div class="sidebar-title">
+                <h4>Conversation</h4>
+                <a href="#">Hide Chat</a>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="SchoolForumProfilePicture.png">
+                </div>
+                <p>Sander Conings</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="SchoolForumProfilePicture.png">
+                </div>
+                <p>Jonathan Deprest</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="SchoolForumProfilePicture.png">
+                </div>
+                <p>Marco Castermans</p>
+            </div>
+
+        </div>
+    </div>
+    <script src="server.js"></script>
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="notifications.js"></script>
+</body>
+
+</html>
