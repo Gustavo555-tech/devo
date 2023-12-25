@@ -143,5 +143,5 @@ app.get('/api/notifications', (req, res) => {
 // Set the port to 5500 and start the server
 const port = 5500;
 app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at http://192.168.1.15:${port}`);
 });
