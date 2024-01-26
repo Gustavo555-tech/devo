@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var accountBtn = document.getElementById('account-btn');
     var accountMenu = document.getElementById('account-menu');
 
+    // Your activity button and submenu
+    var activityBtn = document.getElementById('activity-btn');
+    var activityMenu = document.getElementById('activity-menu');
+
     // Notifications button and submenu
     var notificationsBtn = document.getElementById('notifications-btn');
     var notificationsMenu = document.getElementById('notifications-menu');
@@ -85,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to center the modal on the screen
-    function centerModal(modal) {
+    function centerModal(emailModal) {
         var windowWidth = window.innerWidth;
         var windowHeight = window.innerHeight;
         var modalWidth = modal.offsetWidth;
@@ -102,6 +106,91 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeEmailModal() {
         var emailModal = document.getElementById('email-modal');
         emailModal.style.display = 'none';
+    }
+
+     // Change Password button click event ******
+     document.getElementById('change-password-btn').addEventListener('click', function () {
+        // Show the password modal
+        var passwordModal = document.getElementById('password-modal');
+        passwordModal.style.display = 'block';
+        centerModal(passwordModal);
+    });
+
+    // Add click event listener to the "Close" button in the modal
+    document.getElementById('close-password-btn-modal').addEventListener('click', function () {
+        closePasswordModal();
+    });
+
+    // Fetch user information when the page loads
+    fetch('http://localhost:5500/api/get-user-info')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Set the globalUserId
+                globalUserId = data.userId;
+                // Other code related to user info can go here
+
+                // Add click event listener to the "Change Password" button in the modal
+                document.getElementById('change-password-btn-modal').addEventListener('click', function () {
+                    changePassword();  // Call the changePassword function
+                });
+            } else {
+                console.error('Error fetching user info:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+    // Function to handle changing password
+    function changePassword() {
+        var newPasswordInput = document.getElementById('new-password');
+        var newPassword = newPasswordInput.value;
+
+        if (newPassword && isValidPassword(newPassword)) {
+            // Make an AJAX request to update the password on the server
+            fetch(`http://localhost:5500/api/change-password/${globalUserId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ newPassword }),  // Send newPassword in the request body
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    alert(data.message);
+
+                    // Close the modal after changing password
+                    closePasswordModal();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        } else {
+            // Handle invalid password
+            alert('Invalid password format');
+        }
+    }
+
+    // Function to center the modal on the screen
+    function centerModal(passwordModal) {
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+        var modalWidth = modal.offsetWidth;
+        var modalHeight = modal.offsetHeight;
+
+        var leftPosition = (windowWidth - modalWidth) / 2;
+        var topPosition = (windowHeight - modalHeight) / 2;
+
+        modal.style.left = leftPosition + 'px';
+        modal.style.top = topPosition + 'px';
+    }
+
+    // Function to close the password modal *****
+    function closePasswordModal() {
+        var passwordModal = document.getElementById('password-modal');
+        passwordModal.style.display = 'none';
     }
 
     // Voeg een click event listener toe aan de profielfoto

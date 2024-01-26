@@ -76,7 +76,7 @@ app.get('/api/get-user-info', (req, res) => {
     const user = users.find(u => u.id === userId);
 
     if (user) {
-        res.json({ success: true, userId: user.id, username: user.username, email: user.email });
+        res.json({ success: true, userId: user.id, username: user.username, email: user.email, password: user.password });
     } else {
         res.status(404).json({ success: false, message: 'User not found' });
     }
@@ -104,6 +104,39 @@ app.post('/api/change-email/:userId', (req, res) => {
                 console.log('Email changed successfully');
                 console.log('New Email:', newEmail);
                 res.json({ success: true, message: 'Email changed successfully', user });
+            })
+            .catch(error => {
+                console.error('Error writing to file:', error);
+                res.status(500).json({ success: false, message: 'Internal server error' });
+            });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+// Endpoint for changing password ****************
+app.post('/api/change-password/:userId', (req, res) => {
+    try {
+        const userId = globalUserId;
+        const { newPassword } = req.body;
+
+        const user = users.find(u => u.id === userId);
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        console.log('Updating password for user:', user.password);
+        console.log('Old password:', user.password);
+
+        user.password = newPassword;
+
+        fs.promises.writeFile('users.json', JSON.stringify(users, null, 2), 'utf-8')
+            .then(() => {
+                console.log('Password changed successfully');
+                console.log('New Password:', newPassword);
+                res.json({ success: true, message: 'Password changed successfully', user });
             })
             .catch(error => {
                 console.error('Error writing to file:', error);
