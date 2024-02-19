@@ -266,7 +266,6 @@ nav {
 }
 
 #email-modal {
-    /* Additional styling for your modal */
     display: none;
     position: fixed;
     top: 50%;
@@ -276,5 +275,18 @@ nav {
     padding: 20px;
     background-color: white;
     z-index: 1000;
-    display: none; /* Initially hidden */
+    display: none;
+}
+
+#password-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: white;
+    z-index: 1000;
+    display: none;
 }
