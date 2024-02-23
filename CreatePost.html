@@ -21,7 +21,7 @@
                 <!--insert notifications, create post and inbox icons-->
                 <li id="nav-notifications-btn"><img src="SchoolForumNotifications.png"></li>
                 <li><img src="SchoolForumInbox.png"></li>
-                <li><button type="button" CreatePost><img src="SchoolForumCreatePost.png"></button></li>
+                <li><button id = return _home onclick="location.href='main.html'">Home</button></li>
             </ul>
             <div id="notifications-container" class="hidden">
                 <!-- Hier worden de meldingen weergegeven -->
@@ -35,7 +35,6 @@
                 <input type="text" placeholder="Search...">
             </div>
             
-            <!--add theme toggle button-->
             <button type="button" data-theme-toggle aria-label="Change to light theme" >Change to light theme</button>
 
             <!--add profile picture and online indicator-->
@@ -103,31 +102,43 @@
             </div>
         </div>
 
-        <!--------------------------Right-sidebar-------------------------->
-        <div class="right-sidebar">
-            <div class="sidebar-title">
-                <h4>Conversation</h4>
-                <a href="#">Hide Chat</a>
-            </div>
-            <div class="online-list">
-                <div class="online">
-                    <img src="SchoolForumProfilePicture.png">
-                </div>
-                <p>Sander Conings</p>
-            </div>
-            <div class="online-list">
-                <div class="online">
-                    <img src="SchoolForumProfilePicture.png">
-                </div>
-                <p>Jonathan Deprest</p>
-            </div>
-            <div class="online-list">
-                <div class="online">
-                    <img src="SchoolForumProfilePicture.png">
-                </div>
-                <p>Marco Castermans</p>
-            </div>
+        <!--------------------------Main-content-------------------------->
+        <style>
+            /* Aangepaste stijlen voor posts */
+            #posts-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
 
+            .post {
+                border: 1px solid #ccc;
+                margin: 10px 0;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: #FDFEFE;
+            }
+
+            .post-text {
+                font-size: 16px;
+            }
+
+            .post-metadata {
+                font-size: 12px;
+                color: #888;
+            }
+        </style>
+
+        <div class="main-content">
+
+            <div id="posts-container">
+                <!-- Hier worden de live posts weergegeven -->
+            </div>
+            <div>
+                <form id="post-form">
+                    <textarea id="post-input" placeholder="Create Post..."></textarea>
+                    <button type="submit">Post</button>
+                </form>
+            </div>
         </div>
     </div>
     <script src="server.js"></script>
@@ -137,5 +148,4 @@
     <script src="change_password_modal.js"></script>
     <script src="notifications.js"></script>
 </body>
-
 </html>
