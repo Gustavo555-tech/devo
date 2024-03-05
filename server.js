@@ -12,6 +12,8 @@ const { v4: uuidv4 } = require("uuid");
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static('./public'))
+
 const users = [];
 const posts = [];
 const notifications = [];
