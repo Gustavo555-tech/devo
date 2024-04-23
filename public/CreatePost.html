@@ -136,16 +136,25 @@
             <div>
                 <form id="post-form">
                     <textarea id="post-input" placeholder="Create Post..."></textarea>
+                    
+                    <!-- Add radio buttons for visibility -->
+                    <input type="radio" id="public" name="visibility" value="public" checked>
+                    <label for="public">Public</label>
+                    
+                    <input type="radio" id="private" name="visibility" value="private">
+                    <label for="private">Private</label>
+                    
                     <button type="submit">Post</button>
                 </form>
             </div>
+            
         </div>
     </div>
-    <script src="server.js"></script>
-    <script src="script.js"></script>
-    <script src="CreatePost.js"></script>
-    <script src="change_email_modal.js"></script>
-    <script src="change_password_modal.js"></script>
-    <script src="notifications.js"></script>
+    <script src="/server.js"></script>
+    <script src="/script.js"></script>
+    <script src="/CreatePost.js"></script>
+    <script src="/change_email_modal.js"></script>
+    <script src="/change_password_modal.js"></script>
+    <script src="/notifications.js"></script>
 </body>
 </html>

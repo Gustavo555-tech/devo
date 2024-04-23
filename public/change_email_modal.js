@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // Fetch user information when the page loads
-  fetch("http://localhost:5500/api/get-user-info")
+  fetch("/api/get-user-info")
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (newEmail && isValidEmail(newEmail)) {
       // Make an AJAX request to update the email on the server
-      fetch(`http://localhost:5500/api/change-email/${globalUserId}`, {
+      fetch(`/api/change-email/${globalUserId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

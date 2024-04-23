@@ -9,6 +9,9 @@
     <!--Connect stylesheet to HTML file-->
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="a6d46fc0-9b35-4032-af2d-2378414a44dd";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
 </head>
 
 <body>
@@ -21,7 +24,7 @@
                 <!--insert notifications, create post and inbox icons-->
                 <li id="nav-notifications-btn"><img src="SchoolForumNotifications.png"></li>
                 <li><img src="SchoolForumInbox.png"></li>
-                <li><button type="button" CreatePost><img src="SchoolForumCreatePost.png"></button></li>
+                <li><a href="/CreatePost.html"><button type="button" CreatePost><img src="SchoolForumCreatePost.png"></button></a></li>
             </ul>
             <div id="notifications-container" class="hidden">
                 <!-- Hier worden de meldingen weergegeven -->
@@ -50,7 +53,7 @@
                         <ul>
                             <li><button id="change-email-btn">Change Email</button></li>
                             <li><button id="change-password-btn">Change Password</button></li>
-                            <li><button id="change-profile-btn">Change Profile Picture</button></li>
+                            <li><a href="/profile.html"><button id="change-profile-btn">Change Profile Picture</button></a></li>
                         </ul>
                     </div>
 
@@ -103,6 +106,44 @@
             </div>
         </div>
 
+        <!--------------------------Main-content-------------------------->
+        <style>
+            /* Aangepaste stijlen voor posts */
+            #posts-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .post {
+                border: 1px solid #ccc;
+                margin: 10px 0;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: #FDFEFE;
+            }
+
+            .post-text {
+                font-size: 16px;
+            }
+
+            .post-metadata {
+                font-size: 12px;
+                color: #888;
+            }
+        </style>
+
+        <div class="main-content">
+
+            <div id="posts-container">
+                <!-- Hier worden de live posts weergegeven -->
+            </div>
+            <div>
+                <form id="post-form">
+                    
+                </form>
+            </div>
+        </div>
+
         <!--------------------------Right-sidebar-------------------------->
         <div class="right-sidebar">
             <div class="sidebar-title">
@@ -127,14 +168,15 @@
                 </div>
                 <p>Marco Castermans</p>
             </div>
-
+        <button>Start Conversation</button>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script src="CreatePost.js"></script>
-    <script src="change_email_modal.js"></script>
-    <script src="change_password_modal.js"></script>
-    <script src="notifications.js"></script>
+    <script src="/script.js"></script>
+    <script src="/server.js"></script>
+    <script src="/CreatePost.js"></script>
+    <script src="/change_email_modal.js"></script>
+    <script src="/change_password_modal.js"></script>
+    <script src="/notifications.js"></script>
 </body>
 
 </html>

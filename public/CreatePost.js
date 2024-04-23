@@ -13,14 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
     createPostButton.addEventListener("click", redirectToCreatePostPage);
 });
 
-
 // Event listener for the post form submission
 document.getElementById("post-form").addEventListener("submit", function (event) {
     event.preventDefault();
     const message = document.getElementById("post-input").value;
 
     // Send the new post to the server
-    fetch('http://localhost:5500/api/posts', {
+    fetch('/api/posts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ function getFormattedDateTime(timestamp) {
 // Function to fetch and display posts
 function getPosts() {
     // Fetch all posts from the server
-    fetch('http://localhost:5500/api/posts')
+    fetch('/api/posts')
         .then(response => response.json())
         .then(posts => {
             console.log('Received posts:', posts); // Log received posts for debugging
@@ -100,3 +99,27 @@ window.onload = function () {
     getPosts();
     setInterval(getPosts, 5000); // Refresh every 5 seconds
 };
+
+document.getElementById("post-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const message = document.getElementById("post-input").value;
+    const visibility = document.querySelector('input[name="visibility"]:checked').value; // Get the selected visibility option
+
+    // Send the new post with visibility to the server
+    fetch('/api/posts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message, visibility }), // Include visibility in the request body
+    })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            // After posting a new message, fetch all posts and update the display
+            getPosts();
+        })
+        .catch(error => console.error('Error:', error));
+
+    document.getElementById("post-input").value = "";
+});

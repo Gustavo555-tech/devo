@@ -8,7 +8,7 @@ document.getElementById("nav-notifications-btn").addEventListener("click", funct
 
     // Als het container wordt getoond, haal meldingen op van de server en vul het meldingencontainer
     if (!notificationsContainer.classList.contains("hidden")) {
-        fetch('http://localhost:5500/api/notifications')
+        fetch('/api/notifications')
             .then(response => response.json())
             .then(notifications => {
                 // Vul het meldingencontainer met de opgehaalde meldingen

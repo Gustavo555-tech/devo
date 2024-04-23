@@ -5,6 +5,12 @@ const cors = require("cors");
 const fs = require("fs");
 const app = express();
 
+const http = require('http');
+const socketIo = require('socket.io');
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
 // Import the uuid library
 const { v4: uuidv4 } = require("uuid");
 
@@ -20,6 +26,12 @@ const notifications = [];
 
 // Initialize global variable for userId
 let globalUserId;
+
+// Set the port to 5500 and start the server
+const port = 5500;
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running at http://192.168.1.15:${port}`);
+});
 
 // Endpoint for login
 app.post("/api/index", (req, res) => {
@@ -215,8 +227,94 @@ app.get("/api/notifications", (req, res) => {
   res.json(notifications);
 });
 
-// Set the port to 5500 and start the server
-const port = 5500;
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Server is running at http://192.168.1.15:${port}`);
+// Endpoint for getting user profile information
+app.get("/api/profile", (req, res) => {
+  const userId = globalUserId;
+
+  const user = users.find((u) => u.id === userId);
+
+  if (user) {
+    res.json({
+      success: true,
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      bio: user.bio,
+      profilePicture: user.profilePicture, // Add profile picture field
+    });
+  } else {
+    res.status(404).json({ success: false, message: "User not found" });
+  }
+});
+
+// Endpoint for updating user profile information
+app.put("/api/profile", (req, res) => {
+  const userId = globalUserId;
+  const { username, email, bio, profilePicture } = req.body;
+
+  const userIndex = users.findIndex((u) => u.id === userId);
+
+  if (userIndex !== -1) {
+    // Update user profile
+    users[userIndex].username = username;
+    users[userIndex].email = email;
+    users[userIndex].bio = bio;
+    users[userIndex].profilePicture = profilePicture;
+
+    // Update user profile in users.json file
+    fs.promises
+      .writeFile("users.json", JSON.stringify(users, null, 2), "utf-8")
+      .then(() => {
+        res.json({ success: true, message: "Profile updated successfully" });
+      })
+      .catch((error) => {
+        console.error("Error writing to file:", error);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      });
+  } else {
+    res.status(404).json({ success: false, message: "User not found" });
+  }
+});
+
+// Define a POST endpoint '/api/posts' to add new messages to the 'posts' array
+app.post("/api/posts", (req, res) => {
+  // Retrieve the message and visibility from the request
+  const { message, visibility } = req.body;
+
+  // Add the message to the 'posts' array of the user along with the visibility
+  const userId = globalUserId; // Retrieve the userId of the current user
+  const user = users.find((u) => u.id === userId);
+
+  if (user) {
+    const timestamp = new Date().toISOString();
+    user.posts.push({ content: message, visibility, timestamp });
+    // Write the updated user data to the JSON file
+    fs.writeFile("users.json", JSON.stringify(users, null, 2), (err) => {
+      if (err) {
+        console.error("Error writing to file:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+      } else {
+        res.json({ success: true, message: "Post added successfully" });
+      }
+    });
+  } else {
+    res.status(404).json({ success: false, message: "User not found" });
+  }
+});
+
+// Define a GET endpoint '/api/posts' to retrieve messages based on visibility
+app.get("/api/posts", (req, res) => {
+  // Retrieve the userId of the current user
+  const userId = globalUserId;
+  const user = users.find((u) => u.id === userId);
+
+  if (user) {
+    // Filter the posts based on visibility
+    const visiblePosts = user.posts.filter((post) => post.visibility === "public");
+    res.json(visiblePosts);
+  } else {
+    res.status(404).json({ success: false, message: "User not found" });
+  }
 });

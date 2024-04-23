@@ -14,7 +14,7 @@ document.getElementById("close-password-btn-modal").addEventListener("click", fu
 // Add click event listener to the "Change Password" button in the modal
 document.getElementById("change-password-btn-modal").addEventListener("click", function () {
     // Retrieve the globalUserId from the server before changing the password
-    fetch("http://localhost:5500/api/get-user-info")
+    fetch("/api/get-user-info")
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
@@ -46,7 +46,7 @@ function changePassword(userId) {
     }
 
     // Make an AJAX request to update the password on the server
-    fetch(`http://localhost:5500/api/change-password/${userId}`, {
+    fetch(`/api/change-password/${userId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

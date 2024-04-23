@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const password = document.getElementById("login-password").value;
 
             // Perform login logic (send data to server for validation)
-            fetch('http://localhost:5500/api/index', {
+            fetch('/api/index', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // Perform registration logic (send data to server to create a new user)
-            fetch('http://localhost:5500/api/register', {
+            fetch('/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
